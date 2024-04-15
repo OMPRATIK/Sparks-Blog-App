@@ -7,6 +7,8 @@ export default function SinglePost() {
   const { id } = useParams();
   const { userInfo } = useContext(UserContext);
   const [post, setPost] = useState({});
+  const [postLikes, setPostLikes] = useState(0);
+  const [hasLiked, setHasLiked] = useState(false);
 
   useEffect(() => {
     async function fetchData() {
@@ -16,15 +18,47 @@ export default function SinglePost() {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
       });
-      const data = await res.json();
-      setPost(data);
+      const { post, user } = await res.json();
+      setPost(post);
+
+      setPostLikes(post.likes.length);
+
+      setHasLiked(post.likes.includes(user.userId));
     }
 
     fetchData();
-  }, [id]);
+  }, []);
 
-  const { author, content, coverImg, createdAt, title } = post;
+  const { author, content, coverImg, createdAt, title, likes } = post;
+
   if (!post) return "";
+
+  const handleLike = async () => {
+    setHasLiked(true);
+    const res = await fetch(`http://localhost:5000/api/v1/post/${id}/like`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    });
+
+    const data = await res.json();
+    setPostLikes(data.length);
+  };
+
+  const handleUnlike = async () => {
+    setHasLiked(false);
+    const res = await fetch(`http://localhost:5000/api/v1/post/${id}/unlike`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    });
+    const data = await res.json();
+    setPostLikes(data.length);
+  };
 
   const deletePost = async () => {
     if (window.confirm("Are you sure you want to delete the post ? ")) {
@@ -68,7 +102,14 @@ export default function SinglePost() {
           )}
         </div>
         <div className="like">
-          <ion-icon name="heart-outline"></ion-icon>
+          <span>{postLikes}</span>
+          <div>
+            {hasLiked ? (
+              <ion-icon name="heart" onClick={handleUnlike}></ion-icon>
+            ) : (
+              <ion-icon name="heart-outline" onClick={handleLike}></ion-icon>
+            )}
+          </div>
         </div>
       </h3>
       <img

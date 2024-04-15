@@ -20,15 +20,15 @@ export default function EditPost() {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
       });
-      const data = await res.json();
+      const { post } = await res.json();
 
-      setTitle(data.title);
-      setSummary(data.summary);
-      setContent(data.content);
+      setTitle(post.title);
+      setSummary(post.summary);
+      setContent(post.content);
     }
 
     fetchData();
-  }, []);
+  }, [id]);
 
   const updatePost = async (e) => {
     e.preventDefault();

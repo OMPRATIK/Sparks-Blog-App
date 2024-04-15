@@ -53,7 +53,7 @@ h2 {
   justify-content: space-between;
   align-items: center;
   padding: 1.2rem 6.4rem;
-  box-shadow: 0 1rem 2rem #5555557b, inset 0 -0.5rem 0.5rem #46464639;
+  box-shadow: 0 1rem 2rem #5555557b;
   width: 100%;
   position: fixed;
   z-index: 9999;
@@ -138,12 +138,21 @@ h2 {
 
 .description .info {
   display: flex;
-  gap: 10px;
+  gap: 5rem;
+  align-items: center;
   color: #666;
   font-size: 1.4rem;
   margin-bottom: 1.6rem;
 }
 
+.info-name {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+}
+.likes {
+  font-size: 1.8rem;
+}
 .author {
   color: #555;
 }
@@ -393,7 +402,7 @@ footer .main-container {
 
 .single-blog .content {
   font-size: 2rem;
-  line-height: 1.7;
+  line-height: 1.8;
   color: #333;
 }
 
@@ -415,6 +424,16 @@ footer .main-container {
   padding-left: 2.2rem;
 }
 
+.like {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.like ion-icon {
+  color: red;
+  fill: red;
+}
 /* EDIT AND LIKES */
 
 .post-actions {
@@ -454,4 +473,9 @@ footer .main-container {
 
 .user span {
   font-size: 2.8rem;
+}
+
+.empty-blog {
+  font-size: 2.4rem;
+  color: #666;
 }

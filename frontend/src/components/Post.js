@@ -17,10 +17,13 @@ export default function Post({ el }) {
           <Link to={`post/${el._id}`}>
             <h2>{el.title}</h2>
           </Link>
-          <p className="info">
-            <span className="author">{el.author.username}</span>
-            <time>{format(new Date(el.createdAt), "MMM d, yyyy HH:mm")}</time>
-          </p>
+          <div className="info">
+            <div className="info-name">
+              <span className="author">{el.author.username}</span>
+              <time>{format(new Date(el.createdAt), "MMM d, yyyy HH:mm")}</time>
+            </div>
+            <div className="likes">{el.likes?.length}💖</div>
+          </div>
           <p className="summary">{el.summary}</p>
         </div>
       </div>

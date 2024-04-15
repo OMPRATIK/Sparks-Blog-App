@@ -6,12 +6,12 @@ import {
   getPosts,
   updatePost,
   deletePost,
+  like,
+  unlike,
 } from "../controllers/post.js";
 
 import multer from "multer";
 const uploadMiddleware = multer({ dest: "uploads/" });
-
-import authorizationMiddleware from "../middleware/auth.js";
 
 router
   .route("/")
@@ -23,5 +23,8 @@ router
   .get(getPost)
   .patch(uploadMiddleware.single("file"), updatePost)
   .delete(deletePost);
+
+router.route("/:id/like").patch(like);
+router.route("/:id/unlike").patch(unlike);
 
 export default router;

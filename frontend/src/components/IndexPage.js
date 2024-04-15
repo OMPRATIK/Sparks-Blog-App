@@ -28,8 +28,11 @@ export default function IndexPage() {
       {!userInfo?.username && <Hero />}
       {userInfo?.username && (
         <div className="main-container">
-          {posts?.length > 0 &&
-            posts.map((post) => <Post el={post} key={post._id} />)}
+          {posts?.length > 0 ? (
+            posts.map((post) => <Post el={post} key={post._id} />)
+          ) : (
+            <p className="empty-blog">No Blogs Yet</p>
+          )}
         </div>
       )}
     </>

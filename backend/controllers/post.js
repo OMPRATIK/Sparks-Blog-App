@@ -54,7 +54,7 @@ const getPost = async (req, res) => {
     throw new NotFoundError(`Post with ${id} doesn't exist`);
   }
 
-  res.status(StatusCodes.OK).json(post);
+  res.status(StatusCodes.OK).json({ post, user: req.user });
 };
 
 const getPosts = async (req, res) => {
@@ -109,4 +109,35 @@ const deletePost = async (req, res) => {
   res.status(StatusCodes.OK).json({ success: "ok" });
 };
 
-export { createPost, getPost, getPosts, updatePost, deletePost };
+const like = async (req, res) => {
+  const { id } = req.params;
+
+  const updatedPost = await Post.findByIdAndUpdate(
+    { _id: id },
+    { $addToSet: { likes: req.user.userId } },
+    { new: true }
+  );
+  console.log(updatedPost.likes);
+  if (!updatedPost) {
+    throw new BadRequestError(`No post with id ${id} found`);
+  }
+
+  res.status(StatusCodes.OK).json(updatedPost.likes);
+};
+
+const unlike = async (req, res) => {
+  const { id } = req.params;
+
+  const updatedPost = await Post.findByIdAndUpdate(
+    { _id: id },
+    { $pull: { likes: req.user.userId } },
+    { new: true }
+  );
+  console.log(updatedPost.likes);
+  if (!updatedPost) {
+    throw new BadRequestError(`No post with id ${id} found`);
+  }
+
+  res.status(StatusCodes.OK).json(updatedPost.likes);
+};
+export { createPost, getPost, getPosts, updatePost, deletePost, like, unlike };
