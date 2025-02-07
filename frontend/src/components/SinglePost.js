@@ -124,10 +124,7 @@ export default function SinglePost() {
           </div>
         </div>
       </h3>
-      <img
-        src={`http://localhost:5000/${coverImg?.replace("\\", "/")}`}
-        alt={`cover img`}
-      />
+      <img src={`/${coverImg?.replace("\\", "/")}`} alt={`cover img`} />
       <div className="content" dangerouslySetInnerHTML={{ __html: content }} />
     </div>
   );
