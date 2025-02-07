@@ -19,7 +19,7 @@ export default function CreatePost() {
     data.set("file", files[0]);
 
     e.preventDefault();
-    const res = await fetch("http://localhost:5000/api/v1/post", {
+    const res = await fetch("/api/v1/post", {
       method: "POST",
       body: data,
       headers: {

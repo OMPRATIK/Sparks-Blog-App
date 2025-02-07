@@ -9,7 +9,7 @@ export default function IndexPage() {
 
   useEffect(() => {
     async function fetchData() {
-      const res = await fetch("http://localhost:5000/api/v1/post", {
+      const res = await fetch("/api/v1/post", {
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${localStorage.getItem("token")}`,

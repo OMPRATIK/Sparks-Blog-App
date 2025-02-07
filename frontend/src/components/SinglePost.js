@@ -57,7 +57,7 @@ export default function SinglePost() {
 
   const handleUnlike = async () => {
     setHasLiked(false);
-    const res = await fetch(`http://localhost:5000/api/v1/post/${id}/unlike`, {
+    const res = await fetch(`/api/v1/post/${id}/unlike`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
@@ -70,7 +70,7 @@ export default function SinglePost() {
 
   const deletePost = async () => {
     if (window.confirm("Are you sure you want to delete the post ? ")) {
-      const res = await fetch(`http://localhost:5000/api/v1/post/${id}`, {
+      const res = await fetch(`/api/v1/post/${id}`, {
         method: "DELETE",
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,

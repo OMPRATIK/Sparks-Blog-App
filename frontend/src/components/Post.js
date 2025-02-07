@@ -7,10 +7,7 @@ export default function Post({ el }) {
       <div className="entry">
         <div className="container-img">
           <Link to={`post/${el._id}`}>
-            <img
-              src={`http://localhost:5000/${el.coverImg.replace("\\", "/")}`}
-              alt="random"
-            />
+            <img src={`/${el.coverImg.replace("\\", "/")}`} alt="random" />
           </Link>
         </div>
         <div className="description">

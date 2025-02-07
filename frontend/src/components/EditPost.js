@@ -40,7 +40,7 @@ export default function EditPost() {
 
     if (files?.[0]) data.set("file", files?.[0]);
 
-    const res = await fetch(`http://localhost:5000/api/v1/post/${id}`, {
+    const res = await fetch(`/api/v1/post/${id}`, {
       method: "PATCH",
       body: data,
       headers: {

@@ -30,7 +30,7 @@ export default function Header() {
 
   const logout = async () => {
     if (window.confirm("Are you sure you want to logout?")) {
-      await fetch("http://localhost:5000/api/v1/auth/logout", {
+      await fetch("/api/v1/auth/logout", {
         method: "POST",
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
