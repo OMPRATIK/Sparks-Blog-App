@@ -20,7 +20,7 @@ export default function SinglePost() {
 
   useEffect(() => {
     async function fetchData() {
-      const res = await fetch(`http://localhost:5000/api/v1/post/${id}`, {
+      const res = await fetch(`/api/v1/post/${id}`, {
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -43,7 +43,7 @@ export default function SinglePost() {
 
   const handleLike = async () => {
     setHasLiked(true);
-    const res = await fetch(`http://localhost:5000/api/v1/post/${id}/like`, {
+    const res = await fetch(`/api/v1/post/${id}/like`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
