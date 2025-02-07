@@ -3,6 +3,7 @@ dotenv.config();
 import express from "express";
 import "express-async-errors";
 import connectDB from "./db/connect.js";
+import path from "path";
 
 import helmet from "helmet";
 import cors from "cors";
@@ -10,6 +11,7 @@ import xss from "xss-clean";
 
 const app = express();
 const PORT = process.env.PORT || 5000;
+const __dirname = path.resolve();
 
 app.use(express.json());
 app.use("/uploads", express.static("uploads"));
@@ -27,6 +29,11 @@ import authorizationMiddleware from "./middleware/auth.js";
 app.use("/api/v1/auth", authRouter);
 app.use("/api/v1/profile", authorizationMiddleware, profileRouter);
 app.use("/api/v1/post", authorizationMiddleware, postRouter);
+
+app.use(express.static(path.join(__dirname, "../frontend/build")));
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "../frontend", "build", "index.html"));
+});
 
 import notFoundMiddleware from "./middleware/not-found.js";
 import errorHandlerMiddleware from "./middleware/error-handler.js";

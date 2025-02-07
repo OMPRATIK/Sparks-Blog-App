@@ -103,9 +103,11 @@ const updatePost = async (req, res) => {
 const deletePost = async (req, res) => {
   const { id } = req.params;
   const post = await Post.findByIdAndDelete({ _id: id });
+
   if (!post) {
     throw new NotFoundError(`No post with id ${id} found`);
   }
+
   res.status(StatusCodes.OK).json({ success: "ok" });
 };
 
@@ -117,7 +119,7 @@ const like = async (req, res) => {
     { $addToSet: { likes: req.user.userId } },
     { new: true }
   );
-  console.log(updatedPost.likes);
+
   if (!updatedPost) {
     throw new BadRequestError(`No post with id ${id} found`);
   }
@@ -133,7 +135,7 @@ const unlike = async (req, res) => {
     { $pull: { likes: req.user.userId } },
     { new: true }
   );
-  console.log(updatedPost.likes);
+
   if (!updatedPost) {
     throw new BadRequestError(`No post with id ${id} found`);
   }

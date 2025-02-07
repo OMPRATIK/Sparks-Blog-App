@@ -3,6 +3,14 @@ import { Link, useParams } from "react-router-dom";
 import { format } from "date-fns";
 import { UserContext } from "../context/UserContext.js";
 
+import {
+  createOutline,
+  heart,
+  heartOutline,
+  trashOutline,
+} from "ionicons/icons";
+import { IonIcon } from "@ionic/react";
+
 export default function SinglePost() {
   const { id } = useParams();
   const { userInfo } = useContext(UserContext);
@@ -27,7 +35,7 @@ export default function SinglePost() {
     }
 
     fetchData();
-  }, []);
+  }, [id]);
 
   const { author, content, coverImg, createdAt, title, likes } = post;
 
@@ -93,10 +101,12 @@ export default function SinglePost() {
           {author?._id === userInfo.userId && (
             <div className="edit-and-delete">
               <Link className="edit" to={`/edit/${post._id}`}>
-                <ion-icon name="create-outline"></ion-icon>
+                <IonIcon icon={createOutline} />
+                {/* <ion-icon name="create-outline"></ion-icon> */}
               </Link>
               <Link className="delete" to="/" onClick={deletePost}>
-                <ion-icon name="trash-outline"></ion-icon>
+                <IonIcon icon={trashOutline} />
+                {/* <ion-icon name="trash-outline"></ion-icon> */}
               </Link>
             </div>
           )}
@@ -105,9 +115,11 @@ export default function SinglePost() {
           <span>{postLikes}</span>
           <div>
             {hasLiked ? (
-              <ion-icon name="heart" onClick={handleUnlike}></ion-icon>
+              // <ion-icon name="heart" onClick={handleUnlike}></ion-icon>
+              <IonIcon icon={heart} onClick={handleUnlike} />
             ) : (
-              <ion-icon name="heart-outline" onClick={handleLike}></ion-icon>
+              // <ion-icon name="heart-outline" onClick={handleLike}></ion-icon>
+              <IonIcon icon={heartOutline} onClick={handleLike} />
             )}
           </div>
         </div>

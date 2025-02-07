@@ -2,6 +2,9 @@ import { useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { UserContext } from "../context/UserContext";
 
+import { libraryOutline, copyOutline } from "ionicons/icons";
+import { IonIcon } from "@ionic/react";
+
 export default function Header() {
   const { setUserInfo, userInfo } = useContext(UserContext);
 
@@ -42,7 +45,7 @@ export default function Header() {
   return (
     <header className="main-header">
       <div className="logo">
-        <ion-icon name="library-outline"></ion-icon>
+        <IonIcon icon={libraryOutline} />
         <a href="/" className="logo-text">
           Sparks
         </a>
@@ -55,7 +58,7 @@ export default function Header() {
           </h4>
           <Link to="/about">About</Link>
           <Link to="/create" className="write-icon">
-            <ion-icon name="copy-outline"></ion-icon>
+            <IonIcon icon={copyOutline} />
           </Link>
           <Link className="btn-logout" onClick={logout} to="/">
             Logout

@@ -6,6 +6,7 @@ import {
   NotFoundError,
   UnauthenticatedError,
 } from "../errors/index.js";
+
 import { StatusCodes } from "http-status-codes";
 
 const register = async (req, res) => {
@@ -62,4 +63,5 @@ const login = async (req, res) => {
 const logout = async (req, res) => {
   res.status(StatusCodes.OK).json({ success: "ok" });
 };
+
 export { register, login, logout };
